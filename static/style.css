@@ -84,3 +84,94 @@ input[type="submit"]:hover {
     letter-spacing: 2px;
 }
 
+
+.book-cover {
+    max-width: 100px;
+    max-height: 150px;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.book-cover-large {
+    max-width: 200px;
+    max-height: 300px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* Очистка потока после обложки */
+.book-card::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .book-cover {
+        max-width: 80px;
+        max-height: 120px;
+        margin-right: 10px;
+    }
+    
+    .book-cover-large {
+        max-width: 150px;
+        max-height: 225px;
+        float: none;
+        display: block;
+        margin: 0 auto 15px;
+    }
+}
+
+.book-details {
+    overflow: auto; /* Очистка потока */
+}
+
+/* Для мобильных */
+@media (max-width: 768px) {
+    .book-details {
+        overflow: visible;
+    }
+}
+
+/* Стили пагинации */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.pagination a {
+    color: #007BFF;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination a.active {
+    background-color: #007BFF;
+    color: white;
+    border: 1px solid #007BFF;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #f0f0f0;
+}
+
+/* Адаптивность пагинации */
+@media (max-width: 600px) {
+    .pagination a {
+        padding: 6px 12px;
+        margin: 2px;
+    }
+}

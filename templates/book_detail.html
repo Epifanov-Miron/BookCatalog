@@ -6,10 +6,30 @@
 </head>
 <body>
     <h1>{{ book[1] }}</h1>
-    <div class="book-card">
+   <div class="book-card">
+    {% if book[5] %}
+        <img src="{{ url_for('get_cover', filename=book[5]) }}" alt="Обложка" class="book-cover-large">
+    {% endif %}
+    <div class="book-details">
         <p><strong>Автор:</strong> {{ book[2] }}</p>
         <p><strong>Жанр:</strong> {{ book[3] }}</p>
         <p><strong>Описание:</strong> {{ book[4] }}</p>
+        <!-- Добавьте отображение рейтинга -->
+        <p><strong>Рейтинг:</strong> 
+            <span class="stars">
+                {% set avg_rating = book[6] if book[6] is not none else 0 %}
+                {% for i in range(1, 6) %}
+                    {% if avg_rating >= i %}
+                        ★
+                    {% elif avg_rating > (i - 0.5) %}
+                        ☆
+                    {% else %}
+                        ☆
+                    {% endif %}
+                {% endfor %}
+            </span>
+            ({{ "%.1f"|format(avg_rating) }})
+        </p>
     </div>
     <h3>Отзывы:</h3>
     <div class="review-box">

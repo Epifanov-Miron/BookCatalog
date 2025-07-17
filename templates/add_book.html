@@ -6,11 +6,12 @@
 </head>
 <body>
     <h1>Добавить книгу</h1>
-    <form method="post" class="form-box">
-        Название: <input type="text" name="title"><br>
+    <form method="post" class="form-box" enctype="multipart/form-data">
+        Название: <input type="text" name="title" required><br>
         Автор: <input type="text" name="author"><br>
         Жанр: <input type="text" name="genre"><br>
         Описание:<br><textarea name="description"></textarea><br>
+        Обложка: <input type="file" name="cover" accept="image/*"><br>
         <input type="submit" value="Сохранить">
     </form>
     <a href="{{ url_for('index') }}">Назад</a>
