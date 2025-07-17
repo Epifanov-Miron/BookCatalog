@@ -155,6 +155,7 @@ def book_detail(book_id):
 def search():
     results = []
     if request.method == 'POST':
+        title = request.form.get('title', '').strip()
         author = request.form.get('author', '').strip()
         genre = request.form.get('genre', '').strip()
         rating = request.form.get('rating', '').strip()
@@ -169,18 +170,19 @@ def search():
                 AVG(r.rating) as avg_rating
             FROM books b
             LEFT JOIN reviews r ON b.id = r.book_id
-            WHERE (b.author LIKE ? OR ? = '')
+            WHERE (b.title LIKE ? OR ? = '')
+              AND (b.author LIKE ? OR ? = '')
               AND (b.genre LIKE ? OR ? = '')
             GROUP BY b.id
             HAVING (avg_rating >= ? OR ? = '')
         '''
         
-        # используем None для пустого рейтинга вместо 0
         rating_value = float(rating) if rating else None
         
         conn = sqlite3.connect('books.db')
         c = conn.cursor()
         c.execute(query, (
+            f'%{title}%', title,
             f'%{author}%', author, 
             f'%{genre}%', genre, 
             rating_value, rating if rating else ''

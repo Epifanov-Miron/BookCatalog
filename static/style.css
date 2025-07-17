@@ -175,3 +175,25 @@ input[type="submit"]:hover {
         margin: 2px;
     }
 }
+
+.search-form .form-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.search-form input[type="text"],
+.search-form input[type="number"] {
+    width: 95%;
+}
+
+@media (max-width: 768px) {
+    .search-form .form-box {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-form input[type="text"],
+    .search-form input[type="number"] {
+        width: 100%;
+    }
+}
