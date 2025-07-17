@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Каталог книг</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Каталог книг</h1>
+    <div class="nav">
+        <a href="{{ url_for('add_book') }}">Добавить книгу</a> |
+        <a href="{{ url_for('search') }}">Расширенный поиск</a>
+    </div>
+    
+    <!-- Фильтр по рейтингу -->
+    <div class="filter-box">
+        <form method="GET" action="{{ url_for('index') }}">
+            <label for="min_rating">Минимальный рейтинг:</label>
+            <select name="min_rating" id="min_rating">
+                <option value="">Все книги</option>
+                <option value="4.5" {% if request.args.get('min_rating') == '4.5' %}selected{% endif %}>4.5+ ★</option>
+                <option value="4" {% if request.args.get('min_rating') == '4' %}selected{% endif %}>4+ ★</option>
+                <option value="3.5" {% if request.args.get('min_rating') == '3.5' %}selected{% endif %}>3.5+ ★</option>
+                <option value="3" {% if request.args.get('min_rating') == '3' %}selected{% endif %}>3+ ★</option>
+            </select>
+            <input type="submit" value="Применить">
+            {% if request.args.get('min_rating') %}
+                <a href="{{ url_for('index') }}" class="reset-filter">Сбросить фильтр</a>
+            {% endif %}
+        </form>
+    </div>
+
+    {% for book in books %}
+    <div class="book-card">
+        <a href="{{ url_for('book_detail', book_id=book[0]) }}">
+            <strong>{{ book[1] }}</strong> — {{ book[2] }}
+            <div class="book-rating">
+                {% set avg_rating = book[5] if book[5] is not none else 0 %}
+                <span class="stars">
+                    {% for i in range(1, 6) %}
+                        {% if avg_rating >= i %}
+                            ★
+                        {% elif avg_rating > (i - 0.5) %}
+                            ☆
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                </span>
+                ({{ "%.1f"|format(avg_rating) }})
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    
+</body>
+</html>

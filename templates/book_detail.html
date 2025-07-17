@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ book[1] }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>{{ book[1] }}</h1>
+    <div class="book-card">
+        <p><strong>Автор:</strong> {{ book[2] }}</p>
+        <p><strong>Жанр:</strong> {{ book[3] }}</p>
+        <p><strong>Описание:</strong> {{ book[4] }}</p>
+    </div>
+    <h3>Отзывы:</h3>
+    <div class="review-box">
+    <ul>
+    {% for review in reviews %}
+        <li>
+            {{ review[0] }} 
+            <div class="book-rating">
+                <span class="stars">
+                    {% for i in range(1, 6) %}
+                        {% if review[1] >= i %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                </span>
+                ({{ review[1] }})
+            </div>
+        </li>
+    {% else %}
+        <li>Нет отзывов.</li>
+    {% endfor %}
+    </ul>
+    </div>
+    <form method="post" class="form-box">
+        Отзыв:<br><textarea name="review"></textarea><br>
+        Оценка: <input type="number" name="rating" min="1" max="5" placeholder = "от 1 до 5"><br>
+        <input type="submit" value="Добавить">
+    </form>
+    <a href="{{ url_for('index') }}">Назад</a>
+    
+</body>
+</html>

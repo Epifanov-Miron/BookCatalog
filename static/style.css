@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f5f5f5;
+}
+h1 {
+    color: #333;
+}
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.nav {
+    margin-bottom: 20px;
+}
+.book-card, .form-box, .review-box, .filter-box {
+    background: #fff;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+input[type="text"], textarea, input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для фильтра */
+.filter-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-box form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.filter-box select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    flex-grow: 1;
+}
+
+.reset-filter {
+    margin-left: auto;
+    color: #dc3545;
+    font-size: 0.9em;
+}
+
+/* Стили для рейтинга */
+.book-rating {
+    margin-top: 8px;
+    color: #ffc107;
+    font-size: 0.95em;
+}
+
+.stars {
+    font-size: 1.2em;
+    letter-spacing: 2px;
+}
+

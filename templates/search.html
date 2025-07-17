@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Поиск книг</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Поиск</h1>
+    <form method="post" class="form-box">
+        Автор: <input type="text" name="author"><br>
+        Жанр: <input type="text" name="genre"><br>
+        Минимальный рейтинг: <input type="number" step="0.1" name="rating" min="0" max="5"><br>
+        <input type="submit" value="Поиск">
+    </form>
+    {% if results %}
+    <h3>Результаты:</h3>
+    {% for book in results %}
+    <div class="book-card">
+        <a href="{{ url_for('book_detail', book_id=book[0]) }}">
+            {{ book[1] }}</a> — {{ book[2] }} (рейтинг: {{ "%.1f"|format(book[4] or 0) }})
+    </div>
+    {% endfor %}
+    {% endif %}
+    <a href="{{ url_for('index') }}">Назад</a>
+</body>
+</html>
